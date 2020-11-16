@@ -1,0 +1,4 @@
+library("reticulate")
+use_condaenv("D:/Anaconda3")
+source_python("D:/Software/PythonWork/GAMA_python/Generate_Traffic_Flow_MAS_RL/GAMA_R/GAMA_time_pause.py") 
+result <-main()
