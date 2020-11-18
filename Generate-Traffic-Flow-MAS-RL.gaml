@@ -12,8 +12,8 @@ global {
 	geometry shape <- envelope(shape_file_roads);
 
 	int nb_people <-0; //10
-	int nb_bus_agent <- 5;
-	int nb_bus_npc <- 0; //3
+	int nb_bus_agent <- 20;
+	int nb_bus_npc <- 10; //3
 	int NPC_speed <-16;
 	int time_to_set_offset <- 1;
 	int episode <- 0;
@@ -232,7 +232,7 @@ global {
 	  point pre_point;point initial_point; point location_1;point location_2;
 	  file Rcode_pause<-text_file("D:/Software/PythonWork/GAMA_python/Generate_Traffic_Flow_MAS_RL/GAMA_R/R_pause.txt"); //file Rcode_clear<-text_file("D:/Software/GamaWorkspace/Python/R_clear.txt");
       file Rcode_read<-text_file("D:/Software/PythonWork/GAMA_python/Generate_Traffic_Flow_MAS_RL/GAMA_R/R_read.txt");
-      list<bus>cars_front_behind;
+      list<bus_agent>cars_front_behind;
       list<point>cars_closest_front_1;list<point>cars_closest_front_2;list<point>cars_closest_front_3;
       list<point>cars_closest_behind_1;list<point>cars_closest_behind_2;list<point>cars_closest_behind_3;
       list<point>cars_closest_10_1;list<point>cars_closest_10_2;list<point>cars_closest_10_3;
@@ -256,7 +256,7 @@ global {
 		 }
 		 distance_left <- distance_all;
 		 distance_left<-max (distance_left,distance_to_goal);
-		 if(round(distance_left/100)>= 0){
+		 if(distance_left>100){
 		     time_target <- int(distance_left/100)*15+ rnd(3);  //key   distance_left/16*10 +15+ rnd(3);//
 		 }
 		 else{
@@ -363,7 +363,7 @@ global {
         //找出 bus_closest; bus bus_2nd_closest;
 	    distance_front_car<-100.0;distance_behind_car<-100.0;
         cars_closest_front_3 <- [];cars_closest_behind_3 <- [];cars_closest_10_3<-[];
-  	    list<bus> buses <- agents_inside(bus);
+  	    list<bus_agent> buses <- agents_inside(bus_agent)+agents_inside(bus);
         cars_front_behind <-  buses closest_to(self, 10) ;//write "cars_front_behind:"+cars_front_behind;
         
         //先算出应有距离
@@ -1106,3 +1106,5 @@ experiment traffic_simulation type: gui {
 		}
 	}
 }
+
+

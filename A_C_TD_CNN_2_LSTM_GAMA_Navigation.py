@@ -15,9 +15,6 @@ warnings.filterwarnings("ignore")
 
 device = torch.device("cuda" if torch.cuda.is_available() else"cpu")  
 
-#save_curve_pic = os.path.abspath(os.curdir)+'/Generate_Traffic_Flow_MAS_RL/result/Actor_Critic_2loss_curve.png'
-#save_critic_loss = os.path.abspath(os.curdir)+'/Generate_Traffic_Flow_MAS_RL/training_data/AC_critic_2loss.csv'
-#save_reward = os.path.abspath(os.curdir)+'/Generate_Traffic_Flow_MAS_RL/training_data/AC_2reward.csv'
 state_size = 6
 action_size = 1 
 torch.set_default_tensor_type(torch.DoubleTensor)
@@ -102,7 +99,7 @@ def main():
     reset()
 
     test = "GAMA"
-    N_agent = 5
+    N_agent = 20
     list_hidden = []
 
     count = 0
