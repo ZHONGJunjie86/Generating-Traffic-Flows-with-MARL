@@ -3,13 +3,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os 
 import cv2
-import  io
-#from PIL import Image
-#import skimage
-#from skimage import io as skio
+import io
+from PIL import Image  
 
-file_head = os.getcwd()+'\\GAMA_python\\Generate_Traffic_Flow_MAS_RL\\GAMA_img\\'
-save_img = os.getcwd()+'\\GAMA_python\\Generate_Traffic_Flow_MAS_RL\\GAMA_img\\save_agents.png'
+file_head = os.getcwd()+'/Generate_Traffic_Flow_MAS_RL/GAMA_img/'
+save_img = os.getcwd()+'/Generate_Traffic_Flow_MAS_RL/GAMA_img/save_agents.png'
 
 def generate_img(): 
     list_img = []
@@ -99,31 +97,39 @@ def generate_img():
                 plt.ylim(float(SELF[1])-100, float(SELF[1])+100)
                 plt.scatter(Route_X[0],Route_Y[0],color = 'g',marker = 'h') #start
                 plt.scatter(Route_X[len(Route_X)-1],Route_Y[len(Route_Y)-1],color = 'purple',marker = 'h') #end
-                plt.plot(Route_X,Route_Y,color = 'grey')   #route
-                plt.scatter(NPC_behind_X, NPC_behind_Y,color = 'b',marker = 'o') #NPC_behind
-                plt.scatter(NPC_front_X, NPC_front_Y,color = 'c',marker = '>') #NPC_front
-                plt.scatter(NPC_closest_10_X, NPC_closest_10_Y,color = 'm',marker = 'P') #NPC_10
-                plt.scatter(float(SELF[0][1:]), float(SELF[1]),color = 'r',marker= 'D')
+                plt.plot(Route_X,Route_Y,color = 'grey',alpha=0.7)   #route
+                plt.scatter(NPC_behind_X, NPC_behind_Y,color = 'b',marker = 'o',s=12) #NPC_behind
+                plt.scatter(NPC_front_X, NPC_front_Y,color = 'c',marker = '>',s=12) #NPC_front
+                plt.scatter(NPC_closest_10_X, NPC_closest_10_Y,color = 'm',marker = 'P',s=12) #NPC_10
+                plt.scatter(float(SELF[0][1:]), float(SELF[1]),color = 'r',marker= 'D',s=12)
                 error = False
+
             except(IndexError,FileNotFoundError,ValueError,OSError,PermissionError):
                 error = True
         
-        plt.savefig(save_img, dpi=100,format = 'png')
-        plt.close()
-      
-        img_cv = cv2.imread(save_img)
-        img_cv = cv2.cvtColor(img_cv, cv2.COLOR_BGR2RGB)
+        buffer =io.BytesIO()
+        plt.savefig( buffer,dpi=100) #save_img
+        buffer.seek(0) 
+        img = np.asarray(bytearray(buffer.read()), dtype=np.uint8)
+        img_cv = cv2.imdecode(img,1)  #0-grey
+        #img_cv = cv2.cvtColor(img_cv, cv2.COLOR_BGR2RGB)
+        #cv2.imwrite(save_img,img_cv)
         list_img.append(img_cv) 
         
-        #buffer = io.BytesIO()
-        #plt.savefig(buffer, format = 'png') #dpi=100,
-        #buffer.seek(0) 
-        #dataPIL = Image.open(buffer)
-        #img_cv = np.asarray(dataPIL)#(dataPIL)
-        #img_cv = cv2.imread(save_img)   # cv2.imread()------np.array, (H x W xC), [0, 255], BGR\
-        #img_cv = skio.imread(buffer)
-        #img_cv = np.asarray(img_cv)
-        #buffer.close()
+        """
+        buffer =io.BytesIO()
+        plt.savefig( buffer,dpi=100) #save_img
+        plt.close()
+        buffer.seek(0) 
+        img = Image.open(buffer)
+        img.save(save_img)
+
+        #Image.fromarray(np.array(imgdata.buf)).save('save_img')
+        img_cv = cv2.imread(save_img)   # save_  cv2.imread()------np.array, (H x W xC), [0, 255], BGR
+        img_cv = cv2.cvtColor(img_cv, cv2.COLOR_BGR2RGB)
+        list_img.append(img_cv) 
+        """
+        buffer.close()
 
     return list_img
 
@@ -223,9 +229,15 @@ def generate_img_train():
         except(IndexError,FileNotFoundError,ValueError,OSError,PermissionError):
             error = True
     
-    plt.savefig(save_img, dpi=100)
+    buffer =io.BytesIO()
+    plt.savefig( buffer,dpi=100) #save_img
     plt.close()
+    buffer.seek(0) 
+    img = Image.open(buffer)
+    img.save(save_img)
+    
     img_cv = cv2.imread(save_img)   # cv2.imread()------np.array, (H x W xC), [0, 255], BGR
     img_cv = cv2.cvtColor(img_cv, cv2.COLOR_BGR2RGB)
+    buffer.close()
+    
     return img_cv
-
