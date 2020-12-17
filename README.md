@@ -8,7 +8,6 @@ I will upload my paper later.
 ![image](https://github.com/ZHONGJunjie86/Generating-Traffic-Flows-with-Mixed_Input_AC_CNN_LSTM_Car_Navigation/blob/main/training_data/3.jpg)
 ![image](https://github.com/ZHONGJunjie86/Generating-Traffic-Flows-with-Mixed_Input_AC_CNN_LSTM_Car_Navigation/blob/main/training_data/4.jpg)
 ![image](https://github.com/ZHONGJunjie86/Generating-Traffic-Flows-with-Mixed_Input_AC_CNN_LSTM_Car_Navigation/blob/main/training_data/5.jpg)
-![image](https://github.com/ZHONGJunjie86/Generating-Traffic-Flows-with-Mixed_Input_AC_CNN_LSTM_Car_Navigation/blob/main/training_data/6.jpg)
 ![image](https://github.com/ZHONGJunjie86/Generating-Traffic-Flows-with-Mixed_Input_AC_CNN_LSTM_Car_Navigation/blob/main/training_data/7.jpg)
 ![image](https://github.com/ZHONGJunjie86/Generating-Traffic-Flows-with-Mixed_Input_AC_CNN_LSTM_Car_Navigation/blob/main/training_data/8a.jpg)
 ![image](https://github.com/ZHONGJunjie86/Generating-Traffic-Flows-with-Mixed_Input_AC_CNN_LSTM_Car_Navigation/blob/main/training_data/8b.jpg)
